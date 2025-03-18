@@ -1,3 +1,13 @@
+.searchForm {
+  display: flex;
+  gap: 30px;
+}
+
+.searchInput {
+  display: flex;
+  flex-direction: column;
+}
+
 .page {
   --gray-rgb: 0, 0, 0;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
