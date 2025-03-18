@@ -1,5 +1,6 @@
-import { Product } from "@/types/product";
 import styles from "./ProductItem.module.css";
+import React from "react";
+import { Product } from "@/types/product";
 
 const ProductItem = (product: Product) => {
     const {name, price, stockQuantity} = product;
@@ -13,4 +14,4 @@ const ProductItem = (product: Product) => {
     )
 }
 
-export default ProductItem;
+export default React.memo(ProductItem);
