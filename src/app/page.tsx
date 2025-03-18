@@ -2,18 +2,22 @@
 
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
+import { getAllProducts } from "./services/products";
 import { Product } from "@/types/product";
 import ProductItem from "@/components/ProductItem/ProductItem";
 
 export default function Home() {
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     async function fetchData() {
-      const request = await fetch("http://localhost:3000/products");
-      const data = await request.json();
-      setProducts(data);
+      try {
+        const data = await getAllProducts();
+        setProducts(data);
+      } catch(error) {
+        console.error("Error fetching products:", error);
+      }
     }
 
     fetchData();
