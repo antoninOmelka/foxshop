@@ -3,7 +3,7 @@
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
-import ProductItem from "@/components/Product/ProductItem";
+import ProductItem from "@/components/ProductItem/ProductItem";
 
 export default function Home() {
 
