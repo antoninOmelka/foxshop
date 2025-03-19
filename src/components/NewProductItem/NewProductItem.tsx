@@ -6,8 +6,10 @@ const NewProductItem = () => {
     const handleSubmit = async (data: Omit<Product, "id">) => {
         try {
             await createProduct(data);
+            alert("Product created successfully!");
         } catch (error) {
             console.error("Failed to create product", error);
+            alert("Failed to create product.");
         }
     };
 

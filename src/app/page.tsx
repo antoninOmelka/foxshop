@@ -20,7 +20,7 @@ export default function Home() {
         const data = await getProducts();
         setProducts(data);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Failed to fetch product:", error);
       }
     };
 

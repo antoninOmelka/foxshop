@@ -8,8 +8,10 @@ const EditableProductItem = ({ product }: { product: Product }) => {
     const handleSubmit = async (data: Omit<Product, "id">) => {
         try {
             await updateProduct({ id: product.id, ...data });
+            alert("Product edited successfully!");
         } catch (error) {
-            console.error("Error updating product:", error);
+            console.error("Failed to edit product:", error);
+            alert("Failed to edit product.");
         }
     };
 
