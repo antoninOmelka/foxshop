@@ -47,3 +47,16 @@ export async function updateProduct(productData: Product): Promise<ProductDetail
 
     return response.json();
 }
+
+export async function deactivateProduct(id: string): Promise<ProductDetailed> {
+    const url = `${BASE_URL}/products/${id}`;
+    const response = await fetch(url, {
+        method: "DELETE"
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to deactivate product: ${response.statusText}`);
+    }
+
+    return response.json();
+}

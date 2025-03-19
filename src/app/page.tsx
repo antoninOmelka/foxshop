@@ -68,8 +68,8 @@ export default function Home() {
           />
         </div>
         <div className={styles.searchInput}>
-          <label htmlFor="includeActive">Include Active</label>
-          <select id="inlcudeActive"
+          <label htmlFor="includeInactive">Include Inactive</label>
+          <select id="inlcudeInactive"
             value={includeInactiveInput}
             onChange={(e) => setIncludeInactive(e.target.value)}
           >

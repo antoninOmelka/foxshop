@@ -1,5 +1,5 @@
 import styles from "./EditableProductItem.module.css"
-import { updateProduct } from "@/app/services/products";
+import { deactivateProduct, updateProduct } from "@/app/services/products";
 import { Product } from "@/types/product";
 import { useState } from "react";
 
@@ -25,6 +25,16 @@ const EditableProductItem = ({ id, name, price, stockQuantity }: Product) => {
         }
     };
 
+    const handleDeactivate = async () => {
+        try {
+            await deactivateProduct(id);
+            alert("Product deactivated successfully!");
+        } catch (error) {
+            console.error("Error deactivation product:", error);
+            alert("Failed to deactivate product.");
+        }
+    };
+
     return (
         <div className={styles.productItem}>
             <h1>Product #{id}</h1>
@@ -37,6 +47,8 @@ const EditableProductItem = ({ id, name, price, stockQuantity }: Product) => {
                 <input id="quantity" name="stockQuantity" type="number" min="0" value={formData.stockQuantity} onChange={handleChange}></input>
                 <button type="submit">Save</button>
             </form>
+
+            <button onClick={handleDeactivate}>Deactivate</button>
         </div>
     )
 }
