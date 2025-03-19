@@ -74,8 +74,8 @@ export default function Home() {
             onChange={(e) => setIncludeInactive(e.target.value)}
           >
             <option value={undefined}></option>
-            <option value="true">True</option>
-            <option value="false">False</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
         </div>
         <button type="submit">Search</button>
