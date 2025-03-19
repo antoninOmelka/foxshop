@@ -34,7 +34,7 @@ const ProductItemDetail = () => {
 
     return (
         <div className="itemDetailPage">
-            <EditableProductItem id={product.id} name={product.name} price={product.price} stockQuantity={product.stockQuantity} />
+            <EditableProductItem product={product} />
         </div>
     )
 };

@@ -1,0 +1,37 @@
+import styles from "./ProductForm.module.css";
+import { Product } from "@/types/product";
+import { useState } from "react";
+
+interface ProductFormProps {
+    initialData: Omit<Product, "id">;
+    onSubmit: (data: Omit<Product, "id">) => void;
+    isEditing?: boolean;
+}
+
+const ProductForm = ({ initialData, onSubmit, isEditing = false }: ProductFormProps) => {
+    const [formData, setFormData] = useState(initialData);
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value,
+        });
+    };
+
+    return (
+        <form className={styles.productFormDetails} onSubmit={(e) => { e.preventDefault(); onSubmit(formData); }}>
+            <label>Name</label>
+            <input name="name" value={formData.name} onChange={handleChange} required/>
+
+            <label>Price</label>
+            <input name="price" type="number" min="0" step="0.01" value={formData.price} onChange={handleChange} required/>
+
+            <label>Stock Quantity</label>
+            <input name="stockQuantity" type="number" min="0" value={formData.stockQuantity} onChange={handleChange} required/>
+
+            <button type="submit">{isEditing ? "Save" : "Create"}</button>
+        </form>
+    );
+};
+
+export default ProductForm;

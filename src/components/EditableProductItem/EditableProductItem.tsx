@@ -1,31 +1,19 @@
 import styles from "./EditableProductItem.module.css"
 import { deactivateProduct, updateProduct } from "@/app/services/products";
 import { Product } from "@/types/product";
-import { useState } from "react";
+import ProductForm from "../ProductForm/ProductForm";
 
 
-const EditableProductItem = ({ id, name, price, stockQuantity }: Product) => {
-    const [formData, setFormData] = useState({id, name, price, stockQuantity });
-
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value
-        });
-    };
-
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
+const EditableProductItem = ({ product }: { product: Product }) => {
+    const handleSubmit = async (data: Omit<Product, "id">) => {
         try {
-            await updateProduct(formData);
+            await updateProduct({ id: product.id, ...data });
         } catch (error) {
             console.error("Error updating product:", error);
         }
     };
 
-    const handleDeactivate = async () => {
+    const handleDeactivate = async (id: string) => {
         try {
             await deactivateProduct(id);
             alert("Product deactivated successfully!");
@@ -37,18 +25,9 @@ const EditableProductItem = ({ id, name, price, stockQuantity }: Product) => {
 
     return (
         <div className={styles.productItem}>
-            <h1>Product #{id}</h1>
-            <form className={styles.productItemDetails} onSubmit={handleSubmit}>
-                <label htmlFor="name">Name</label>
-                <input id="name" name="name" type="text" value={formData.name} onChange={handleChange}></input>
-                <label htmlFor="price">Price</label>
-                <input id="price" name="price" type="number" min="0" step="0.01" value={formData.price} onChange={handleChange}></input>
-                <label htmlFor="quantity">Stock Quantity</label>
-                <input id="quantity" name="stockQuantity" type="number" min="0" value={formData.stockQuantity} onChange={handleChange}></input>
-                <button type="submit">Save</button>
-            </form>
-
-            <button onClick={handleDeactivate}>Deactivate</button>
+            <h1>Edit Product #{product.id}</h1>
+            <ProductForm initialData={product} onSubmit={handleSubmit} isEditing />
+            <button onClick={() => handleDeactivate(product.id)}>Deactivate</button>
         </div>
     )
 }
