@@ -1,15 +1,28 @@
 import styles from "./EditableProductItem.module.css"
+import { updateProduct } from "@/app/services/products";
 import { Product } from "@/types/product";
 import { useState } from "react";
 
 
 const EditableProductItem = ({ id, name, price, stockQuantity }: Product) => {
-    const [nameInput, setNameInput] = useState(name);
-    const [priceInput, setPriceInput] = useState(price);
-    const [quantityInput, setQuantityInput] = useState(stockQuantity);
+    const [formData, setFormData] = useState({id, name, price, stockQuantity });
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value
+        });
+    };
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        try {
+            await updateProduct(formData);
+        } catch (error) {
+            console.error("Error updating product:", error);
+        }
     };
 
     return (
@@ -17,11 +30,11 @@ const EditableProductItem = ({ id, name, price, stockQuantity }: Product) => {
             <h1>Product #{id}</h1>
             <form className={styles.productItemDetails} onSubmit={handleSubmit}>
                 <label htmlFor="name">Name</label>
-                <input id="name" type="text" value={nameInput} onChange={(e) => setNameInput(e.target.value)}></input>
+                <input id="name" name="name" type="text" value={formData.name} onChange={handleChange}></input>
                 <label htmlFor="price">Price</label>
-                <input id="price" type="number" value={priceInput} onChange={(e) => setPriceInput(Number(e.target.value))}></input>
+                <input id="price" name="price" type="number" min="0" step="0.01" value={formData.price} onChange={handleChange}></input>
                 <label htmlFor="quantity">Stock Quantity</label>
-                <input id="quantity" type="number" value={quantityInput} onChange={(e) => setQuantityInput(Number(e.target.value))}></input>
+                <input id="quantity" name="stockQuantity" type="number" min="0" value={formData.stockQuantity} onChange={handleChange}></input>
                 <button type="submit">Save</button>
             </form>
         </div>
