@@ -1,10 +1,14 @@
 import { Product } from "@/types/product";
 import ProductForm from "../ProductForm/ProductForm";
+import { createProduct } from "@/app/services/products";
 
 const NewProductItem = () => {
     const handleSubmit = async (data: Omit<Product, "id">) => {
-        console.log(data);
-        //await createProduct(data);
+        try {
+            await createProduct(data);
+        } catch (error) {
+            console.error("Failed to create product", error);
+        }
     };
 
     return (

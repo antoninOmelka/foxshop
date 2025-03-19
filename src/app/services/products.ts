@@ -31,6 +31,23 @@ export async function getProduct(id: string): Promise<ProductDetailed> {
     return response.json();
 }
 
+export async function createProduct(productData: Omit<Product, "id">): Promise<ProductDetailed> {
+    const url = `${BASE_URL}/products`;
+    const response = await fetch(url, {
+        method: "POST", 
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productData)
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to create product: ${response.statusText}`);
+    }
+
+    return response.json();
+}
+
 export async function updateProduct(productData: Product): Promise<ProductDetailed> {
     const url = `${BASE_URL}/products/${productData.id}`;
     const response = await fetch(url, {
