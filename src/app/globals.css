@@ -40,3 +40,8 @@ a {
     color-scheme: dark;
   }
 }
+
+.itemDetailPage {
+  display: flex;
+  justify-content: center;
+}

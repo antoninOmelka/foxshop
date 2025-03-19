@@ -19,3 +19,14 @@ export async function getProducts(name?: string, minStock?: number, maxStock?: n
     
     return response.json();
 }
+
+export async function getProduct(id: string): Promise<Product> {
+    const url = `${BASE_URL}/products/${id}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error(`Error fetching product: ${response.statusText}`);
+    }
+
+    return response.json();
+}

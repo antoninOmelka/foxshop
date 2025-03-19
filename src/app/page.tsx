@@ -22,7 +22,7 @@ export default function Home() {
       } catch (error) {
         console.error("Error fetching products:", error);
       }
-    }
+    };
 
     fetchData();
   }, []);
@@ -81,8 +81,8 @@ export default function Home() {
         <button type="submit">Search</button>
       </form>
       <main className={styles.main}>
-        {products.map((product: Product, index) => {
-          return <ProductItem key={product.name + index} name={product.name} price={product.price} stockQuantity={product.stockQuantity} />
+        {products.map((product: Product) => {
+          return <ProductItem key={product.name + product.id} id={product.id} name={product.name} price={product.price} stockQuantity={product.stockQuantity} />
         })}
       </main>
       <footer className={styles.footer}>
