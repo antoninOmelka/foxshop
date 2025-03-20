@@ -3,3 +3,15 @@
     flex-direction: column;
     gap: 5px;
 }
+
+.productFormDetails > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.error {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
