@@ -4,6 +4,7 @@ import { createProduct } from "@/app/services/products";
 import { useState } from "react";
 
 const NewProductItem = () => {
+    const [formKey, setFormKey] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     
     const handleSubmit = async (data: Omit<Product, "id">) => {
@@ -13,6 +14,7 @@ const NewProductItem = () => {
         try {
             await createProduct(data);
             alert("Product created successfully!");
+            setFormKey((prevKey) => prevKey + 1);
         } catch (error) {
             console.error("Failed to create product", error);
             alert("Failed to create product.");
@@ -24,7 +26,7 @@ const NewProductItem = () => {
     return (
         <div>
             <h1>Create New Product</h1>
-            <ProductForm initialData={{ name: "", price: 0, stockQuantity: 0, isActive: true }} onSubmit={handleSubmit} isSubmitting={isSubmitting} />
+            <ProductForm key={formKey} initialData={{ name: "", price: 0, stockQuantity: 0, isActive: true }} onSubmit={handleSubmit} isSubmitting={isSubmitting} />
         </div>
     );
 };
