@@ -3,6 +3,7 @@ export interface Product {
     name: string;
     price: number;
     stockQuantity: number;
+    isActive: boolean;
 }
 
 interface PriceHistoryEntry {
@@ -14,7 +15,6 @@ interface PriceHistoryEntry {
 }
 
 export interface ProductDetailed extends Product {
-    isActive: boolean;
     createdAt: string;
     updatedAt: string;
     priceHistory?: PriceHistoryEntry[];

@@ -83,7 +83,7 @@ export default function Home() {
       <main className={styles.main}>
         <a href={`/products/new`}><button>Add new product</button></a>
         {products.map((product: Product) => {
-          return <ProductItem key={product.name + product.id} id={product.id} name={product.name} price={product.price} stockQuantity={product.stockQuantity} />
+          return <ProductItem key={product.name + product.id} id={product.id} name={product.name} price={product.price} stockQuantity={product.stockQuantity} isActive={product.isActive} />
         })}
       </main>
       <footer className={styles.footer}>

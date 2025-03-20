@@ -6,9 +6,10 @@ interface ProductFormProps {
     initialData: Omit<Product, "id">;
     onSubmit: (data: Omit<Product, "id">) => void;
     isEditing?: boolean;
+    isSubmitting: boolean;
 }
 
-const ProductForm = ({ initialData, onSubmit, isEditing = false }: ProductFormProps) => {
+const ProductForm = ({ initialData, onSubmit, isEditing = false, isSubmitting }: ProductFormProps) => {
     const [formData, setFormData] = useState(initialData);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,15 +22,15 @@ const ProductForm = ({ initialData, onSubmit, isEditing = false }: ProductFormPr
     return (
         <form className={styles.productFormDetails} onSubmit={(e) => { e.preventDefault(); onSubmit(formData); }}>
             <label>Name</label>
-            <input name="name" value={formData.name} onChange={handleChange} required/>
+            <input name="name" value={formData.name} onChange={handleChange} required />
 
             <label>Price</label>
-            <input name="price" type="number" min="0" step="0.01" value={formData.price} onChange={handleChange} required/>
+            <input name="price" type="number" min="0" step="0.01" value={formData.price} onChange={handleChange} required />
 
             <label>Stock Quantity</label>
-            <input name="stockQuantity" type="number" min="0" value={formData.stockQuantity} onChange={handleChange} required/>
+            <input name="stockQuantity" type="number" min="0" value={formData.stockQuantity} onChange={handleChange} required />
 
-            <button type="submit">{isEditing ? "Save" : "Create"}</button>
+            <button type="submit" disabled={isSubmitting}>{isEditing ? "Save" : "Create"}</button>
         </form>
     );
 };
