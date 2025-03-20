@@ -41,7 +41,7 @@ const EditableProductItem = ({ product }: EditableProductItemProps) => {
             setIsActive(false);
             alert("Product deactivated successfully!");
         } catch (error) {
-            console.error("Error deactivating product:", error);
+            console.error("Failed to deactivate product:", error);
             alert("Failed to deactivate product.");
         } finally {
             setIsDeactivating(false);

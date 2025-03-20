@@ -8,6 +8,7 @@ import ProductItem from "@/components/ProductItem/ProductItem";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
   const [nameInput, setNameInput] = useState<string>("");
   const [minStockInput, setMinStockInput] = useState<string>("");
   const [maxStockInput, setMaxStockInput] = useState<string>("");
@@ -39,17 +40,24 @@ export default function Home() {
     const maxStockQuery = maxStockInput ? Number(maxStockInput) : undefined;
     const includeInactiveQuery = includeInactiveInput === "true" ? true : includeInactiveInput === "false" ? false : undefined;
 
-    const data = await getProducts(nameQuery, minStockQuery, maxStockQuery, includeInactiveQuery);
-    setProducts(data);
+    try {
+      setIsSearching(true);
+      const data = await getProducts(nameQuery, minStockQuery, maxStockQuery, includeInactiveQuery);
+      setProducts(data);
+    } catch (error) {
+      console.error("Failed to fetch products", error);
+    } finally {
+      setIsSearching(false);
+    }
   };
 
   if (isLoading) {
     return (
-        <div className="itemDetailPage">
-            <p>Loading...</p>
-        </div>
+      <div className="itemDetailPage">
+        <p>Loading...</p>
+      </div>
     )
-}
+  }
 
   return (
     <div className={styles.page}>
@@ -89,7 +97,7 @@ export default function Home() {
             <option value="false">No</option>
           </select>
         </div>
-        <button type="submit">Search</button>
+        <button disabled={isSearching} type="submit">Search</button>
       </form>
       <main className={styles.main}>
         <a href={`/products/new`}><button>Add new product</button></a>
