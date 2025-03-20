@@ -65,7 +65,13 @@ export default function Home() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name, value } = event.target;
-    const newValue = event.target.type === "number" ? Number(value) : value;
+    let newValue: string | number | boolean | undefined = value;
+    
+    if (event.target.type === "number") {
+      newValue = Number(value);
+    } else if (name === "includeInactive") {
+      newValue = value === "" ? undefined : value === "true";
+    }
     
     setFormData(prev => ({
       ...prev,
@@ -82,7 +88,13 @@ export default function Home() {
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name, value } = event.target;
-    const fieldValue = event.target.type === "number" ? Number(value) : value;
+    let fieldValue: string | number | boolean | undefined = value;
+    
+    if (event.target.type === "number") {
+      fieldValue = Number(value);
+    } else if (name === "includeInactive") {
+      fieldValue = value === "" ? undefined : value === "true";
+    }
     
     const error = validateField(name as keyof SearchFormData, fieldValue);
     setErrors(prev => ({
@@ -93,7 +105,7 @@ export default function Home() {
 
   const onSearch = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    
+    console.log(formData);
     try {
       const validatedData = SearchFormSchema.parse(formData);
       setIsSearching(true);
@@ -179,6 +191,7 @@ export default function Home() {
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
+          {errors.includeInactive && <span className={styles.error}>{errors.includeInactive}</span>}
         </div>
         <button disabled={isSearching} type="submit">Search</button>
       </form>

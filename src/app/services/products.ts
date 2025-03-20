@@ -18,20 +18,19 @@ async function apiRequest<T>(endpoint: string, options: RequestInit = {}): Promi
     return response.json();
 }
 
-function buildQueryString(params: Record<string, unknown>): string {
-    const searchParams = new URLSearchParams();
-    Object.entries(params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-            searchParams.append(key, value.toString());
-        }
-    });
-    return searchParams.toString();
-}
+export async function getProducts(
+    name?: string,
+    minStock?: number,
+    maxStock?: number,
+    includeInactive?: boolean
+): Promise<Product[]> {
+    const params = new URLSearchParams();
+    if (name) params.append("name", name);
+    if (minStock !== undefined) params.append("minStock", minStock.toString());
+    if (maxStock !== undefined) params.append("maxStock", maxStock.toString());
+    if (includeInactive !== undefined) params.append("includeInactive", includeInactive.toString());
 
-export async function getProducts(name?: string, minStock?: number, maxStock?: number, includeInactive?: boolean): Promise<ProductDetailed[]> {
-    const params = { name, minStock, maxStock, includeInactive };
-    const queryString = buildQueryString(params);
-    return apiRequest<ProductDetailed[]>(`/products?${queryString}`);
+    return apiRequest<ProductDetailed[]>(`/products?${params.toString()}`);
 }
 
 export async function getProduct(id: string): Promise<ProductDetailed> {
