@@ -12,7 +12,7 @@ const ProductItemDetail = () => {
     const [product, setProduct] = useState<Product>();
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchData(): Promise<void> {
             try {
                 const data = await getProduct(productId);
                 setProduct(data);

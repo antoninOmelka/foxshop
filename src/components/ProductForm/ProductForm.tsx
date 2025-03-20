@@ -12,15 +12,20 @@ interface ProductFormProps {
 const ProductForm = ({ initialData, onSubmit, isEditing = false, isSubmitting }: ProductFormProps) => {
     const [formData, setFormData] = useState(initialData);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setFormData({
             ...formData,
             [event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value,
         });
     };
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+        event.preventDefault();
+        onSubmit(formData);
+    };
+
     return (
-        <form className={styles.productFormDetails} onSubmit={(e) => { e.preventDefault(); onSubmit(formData); }}>
+        <form className={styles.productFormDetails} onSubmit={handleSubmit}>
             <label>Name</label>
             <input name="name" value={formData.name} onChange={handleChange} required />
 

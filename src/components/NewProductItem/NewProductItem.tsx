@@ -7,7 +7,7 @@ const NewProductItem = () => {
     const [formKey, setFormKey] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     
-    const handleSubmit = async (data: Omit<Product, "id">) => {
+    const handleSubmit = async (data: Omit<Product, "id">): Promise<void> => {
         if (isSubmitting) return;
         setIsSubmitting(true);
 

@@ -13,7 +13,7 @@ const EditableProductItem = ({ product }: EditableProductItemProps) => {
     const [isDeactivating, setIsDeactivating] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = async (data: Omit<Product, "id">) => {
+    const handleSubmit = async (data: Omit<Product, "id">): Promise<void> => {
         if (isSubmitting) return;
         setIsSubmitting(true);
 
@@ -28,7 +28,11 @@ const EditableProductItem = ({ product }: EditableProductItemProps) => {
         }
     };
 
-    const handleDeactivate = async (id: string) => {
+    const handleDeactivateClick = (): void => {
+        handleDeactivate(product.id);
+    };
+
+    const handleDeactivate = async (id: string): Promise<void> => {
         if (isDeactivating) return;
         setIsDeactivating(true);
 
@@ -44,11 +48,11 @@ const EditableProductItem = ({ product }: EditableProductItemProps) => {
         }
     };
 
-    const isDeactivable = () => {
+    const isDeactivable = (): boolean => {
         return !isActive || isDeactivating || isSubmitting;
     };
 
-    const isDisabled = () => {
+    const isDisabled = (): boolean => {
         return isDeactivating || isSubmitting;
     }
 
@@ -56,7 +60,7 @@ const EditableProductItem = ({ product }: EditableProductItemProps) => {
         <div className={styles.productItem}>
             <h1>Edit Product #{product.id}</h1>
             <ProductForm initialData={product} onSubmit={handleSubmit} isEditing isSubmitting={isDisabled()}/>
-            <button disabled={isDeactivable()} onClick={() => handleDeactivate(product.id)}>
+            <button disabled={isDeactivable()} onClick={handleDeactivateClick}>
                 {isDeactivating ? "Deactivating..." : "Deactivate"}
             </button>
         </div>

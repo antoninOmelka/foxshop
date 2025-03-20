@@ -28,7 +28,7 @@ export default function Home() {
   }, []);
 
 
-  const onSearch = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSearch = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
     const nameQuery = nameInput.trim() || undefined;
