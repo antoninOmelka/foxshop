@@ -7,6 +7,7 @@ import { Product } from "@/types/product";
 import ProductItem from "@/components/ProductItem/ProductItem";
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [nameInput, setNameInput] = useState<string>("");
   const [minStockInput, setMinStockInput] = useState<string>("");
   const [maxStockInput, setMaxStockInput] = useState<string>("");
@@ -21,6 +22,8 @@ export default function Home() {
         setProducts(data);
       } catch (error) {
         console.error("Failed to fetch product:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -39,6 +42,14 @@ export default function Home() {
     const data = await getProducts(nameQuery, minStockQuery, maxStockQuery, includeInactiveQuery);
     setProducts(data);
   };
+
+  if (isLoading) {
+    return (
+        <div className="itemDetailPage">
+            <p>Loading...</p>
+        </div>
+    )
+}
 
   return (
     <div className={styles.page}>

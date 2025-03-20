@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 const ProductItemDetail = () => {
     const params = useParams();
     const productId = String(params?.productId);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [product, setProduct] = useState<Product>();
 
     useEffect(() => {
@@ -18,11 +19,21 @@ const ProductItemDetail = () => {
                 setProduct(data);
             } catch (error) {
                 console.error("Failed to fetch product:", error);
+            } finally {
+                setIsLoading(false);
             }
         };
 
         fetchData();
     }, [productId]);
+
+    if (isLoading) {
+        return (
+            <div className="itemDetailPage">
+                <p>Loading...</p>
+            </div>
+        )
+    }
 
     if (!product) {
         return ( 
