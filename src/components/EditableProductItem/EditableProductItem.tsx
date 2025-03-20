@@ -4,8 +4,11 @@ import { Product } from "@/types/product";
 import ProductForm from "../ProductForm/ProductForm";
 import { useState } from "react";
 
+interface EditableProductItemProps {
+    product: Product;
+};
 
-const EditableProductItem = ({ product }: { product: Product }) => {
+const EditableProductItem = ({ product }: EditableProductItemProps) => {
     const [isActive, setIsActive] = useState<boolean>(product.isActive);
     const [isDeactivating, setIsDeactivating] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);

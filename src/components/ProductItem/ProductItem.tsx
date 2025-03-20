@@ -2,9 +2,13 @@ import styles from "./ProductItem.module.css";
 import React from "react";
 import { Product } from "@/types/product";
 
-const ProductItem = ({ product }: { product: Product }) => {
+interface ProductItemProps {
+    product: Product
+};
+
+const ProductItem = ({ product }: ProductItemProps) => {
     const { id, name, price, stockQuantity } = product;
-    
+
     return (
         <div className={styles.productItemContainer}>
             <span>{`Name: ${name}`}</span>
