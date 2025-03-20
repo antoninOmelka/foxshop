@@ -10,8 +10,8 @@ Assignment Front-End project for [Exampleshop](https://hub.docker.com/r/sajdlava
 
 ### Prerequisites
 
-- Node.js (version 18 or higher)
-- npm
+- Node.js (tested with 22.13.0)
+- npm (tested with 10.4.0)
 
 ### Installation
 
