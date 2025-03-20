@@ -27,7 +27,7 @@ const ProductForm = ({ initialData, onSubmit, isEditing = false, isSubmitting }:
     return (
         <form className={styles.productFormDetails} onSubmit={handleSubmit}>
             <label>Name</label>
-            <input name="name" value={formData.name} onChange={handleChange} required />
+            <input name="name" maxLength={40} value={formData.name} onChange={handleChange} required />
 
             <label>Price</label>
             <input name="price" type="number" min="0" step="0.01" value={formData.price} onChange={handleChange} required />
