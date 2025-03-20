@@ -1,5 +1,5 @@
 import styles from "./ProductItem.module.css";
-import React from "react";
+import { memo } from "react";
 import { Product } from "@/types/product";
 
 interface ProductItemProps {
@@ -19,4 +19,4 @@ const ProductItem = ({ product }: ProductItemProps) => {
     )
 }
 
-export default React.memo(ProductItem);
+export default memo(ProductItem);
