@@ -37,14 +37,14 @@ export async function getProduct(id: string): Promise<ProductDetailed> {
     return apiRequest<ProductDetailed>(`/products/${id}`);
 }
 
-export async function createProduct(productData: Omit<Product, "id">): Promise<ProductDetailed> {
+export async function createProduct(productData: Omit<Product, "id" | "isActive">): Promise<ProductDetailed> {
     return apiRequest<ProductDetailed>("/products", {
         method: "POST",
         body: JSON.stringify(productData),
     });
 }
 
-export async function updateProduct(productData: Product): Promise<ProductDetailed> {
+export async function updateProduct(productData:  Omit<Product, "isActive">): Promise<ProductDetailed> {
     return apiRequest<ProductDetailed>(`/products/${productData.id}`, {
         method: "PATCH",
         body: JSON.stringify(productData),

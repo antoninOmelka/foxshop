@@ -13,7 +13,7 @@ const EditableProductItem = ({ product }: EditableProductItemProps) => {
     const [isDeactivating, setIsDeactivating] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = async (data: Omit<Product, "id">): Promise<void> => {
+    const handleSubmit = async (data: Omit<Product, "id" | "isActive">): Promise<void> => {
         if (isSubmitting) return;
         setIsSubmitting(true);
 
