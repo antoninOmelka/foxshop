@@ -196,7 +196,9 @@ export default function Home() {
         <button disabled={isSearching} type="submit">Search</button>
       </form>
       <main className={styles.main}>
-        <a href={`/products/new`}><button>Add new product</button></a>
+        <div className={styles.addButton}>
+          <a href={`/products/new`}><button>Add new product</button></a>
+        </div>
         {products.map((product: Product) => {
           return <ProductItem key={product.name + product.id} product={product} />
         })}

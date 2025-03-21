@@ -119,7 +119,7 @@ const ProductForm = ({ initialData, onSubmit, isEditing = false, isSubmitting }:
                 />
                 {errors.stockQuantity && <span className={styles.error}>{errors.stockQuantity}</span>}
 
-            <button type="submit" disabled={isSubmitting}>
+            <button className={styles.formButton} type="submit" disabled={isSubmitting}>
                 {isEditing ? "Save" : "Create"}
             </button>
         </form>

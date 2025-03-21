@@ -14,7 +14,9 @@ const ProductItem = ({ product }: ProductItemProps) => {
             <span>{`Name: ${name}`}</span>
             <span>{`Price: ${price}`}</span>
             <span>{`Stock quanity: ${stockQuantity}`}</span>
-            <a href={`/products/${id}`}><button>Edit</button></a>
+            <div className={styles.editButton}>
+                <a href={`/products/${id}`}><button>Edit</button></a>
+            </div>
         </div>
     )
 }

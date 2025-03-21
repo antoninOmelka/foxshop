@@ -47,6 +47,15 @@
   gap: 10px;
 }
 
+.addButton {
+  width: 100px;
+}
+
+.addButton button {
+    cursor: pointer;
+}
+
+
 .main ol {
   font-family: var(--font-geist-mono);
   padding-left: 0;

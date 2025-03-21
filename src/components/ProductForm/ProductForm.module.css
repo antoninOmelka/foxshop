@@ -10,6 +10,11 @@
     gap: 5px;
 }
 
+.formButton {
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
 .error {
     color: #dc2626;
     font-size: 0.875rem;
