@@ -17,7 +17,7 @@ Assignment Front-End project for [Exampleshop](https://hub.docker.com/r/sajdlava
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/antonin.omelka/foxshop.git
+git clone https://github.com/antoninOmelka/foxshop.git
 cd foxshop
 ```
 
