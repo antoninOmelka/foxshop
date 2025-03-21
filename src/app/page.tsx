@@ -68,7 +68,7 @@ export default function Home() {
     let newValue: string | number | boolean | undefined = value;
     
     if (event.target.type === "number") {
-      newValue = Number(value);
+      newValue = value === "" ? undefined : Number(value);
     } else if (name === "includeInactive") {
       newValue = value === "" ? undefined : value === "true";
     }
@@ -91,7 +91,7 @@ export default function Home() {
     let fieldValue: string | number | boolean | undefined = value;
     
     if (event.target.type === "number") {
-      fieldValue = Number(value);
+      fieldValue = value === "" ? undefined : Number(value);
     } else if (name === "includeInactive") {
       fieldValue = value === "" ? undefined : value === "true";
     }
@@ -105,7 +105,7 @@ export default function Home() {
 
   const onSearch = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    console.log(formData);
+
     try {
       const validatedData = SearchFormSchema.parse(formData);
       setIsSearching(true);
@@ -160,7 +160,7 @@ export default function Home() {
             id="minStock"
             name="minStock"
             type="number"
-            value={formData.minStock || ""} 
+            value={formData.minStock !== undefined ? formData.minStock : ""} 
             onChange={handleChange}
             onBlur={handleBlur}
           />
@@ -172,7 +172,7 @@ export default function Home() {
             id="maxStock"
             name="maxStock"
             type="number"
-            value={formData.maxStock || ""} 
+            value={formData.maxStock !== undefined ? formData.maxStock : ""} 
             onChange={handleChange}
             onBlur={handleBlur}
           />
