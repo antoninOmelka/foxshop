@@ -133,7 +133,7 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="itemDetailPage">
+      <div className="item-detail-page">
         <p>Loading...</p>
       </div>
     )

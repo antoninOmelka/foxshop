@@ -29,7 +29,7 @@ const ProductItemDetail = () => {
 
     if (isLoading) {
         return (
-            <div className="itemDetailPage">
+            <div className="item-detail-page">
                 <p>Loading...</p>
             </div>
         )
@@ -37,14 +37,14 @@ const ProductItemDetail = () => {
 
     if (!product) {
         return ( 
-            <div className="itemDetailPage">
+            <div className="item-detail-page">
                 <p>Product not found</p>
             </div>
         );
     }
 
     return (
-        <div className="itemDetailPage">
+        <div className="item-detail-page">
             <EditableProductItem product={product} />
         </div>
     )

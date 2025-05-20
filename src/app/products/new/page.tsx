@@ -5,7 +5,7 @@ import NewProductItem from "@/components/NewProductItem/NewProductItem";
 const NewProductItemDetail = () => {
 
     return (
-        <div className="itemDetailPage">
+        <div className="item-detail-page">
             <NewProductItem />
         </div>
     )
