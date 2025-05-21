@@ -1,12 +1,14 @@
 # FoxShop
 
 Assignment Front-End project for [Exampleshop](https://hub.docker.com/r/sajdlavantro/exampleshop) Back-End. FoxShop implements basic CRUD operations and supports query based search. 
+No styling is applied for the assigment.
 
 ## Tech Stack
 
 - React
 - Next.js
 - TypeScript
+- Zod
 
 ### Prerequisites
 
